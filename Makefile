@@ -1,5 +1,5 @@
 setup:
-	@npm install
+	@yarn
 
 run:
 	@npm run start
