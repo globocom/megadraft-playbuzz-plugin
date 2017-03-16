@@ -5,13 +5,26 @@
  */
 
 import React, {Component} from "react";
-
+import load from "load-script";
 
 export default class PlayBuzz extends Component {
+
+  loadWidget() {
+    if (window.PlayBuzz) {
+      return;
+    }
+    load('//cdn.playbuzz.com/widget/feed.js', function (err, script) {
+      if (err) {}
+    })
+  }
+
   render() {
     if (!this.props.url) {
       return null;
     }
+
+    this.loadWidget();
+
     return (
       <div className="playbuzz">
         <div className="pb_feed"
