@@ -8,6 +8,8 @@ import React, {Component} from "react";
 import {MegadraftPlugin, MegadraftIcons} from "megadraft";
 const {BlockContent, BlockData, BlockInput, CommonBlock} = MegadraftPlugin;
 
+import PlayBuzz from "./PlayBuzz";
+
 
 export default class Block extends Component {
   constructor(props) {
@@ -46,7 +48,8 @@ export default class Block extends Component {
     this.setState({
       url: this.state.input.url,
       input: {
-        url: ""
+        url: "",
+        errors: []
       }
     });
   }
@@ -55,7 +58,7 @@ export default class Block extends Component {
     return (
       <CommonBlock {...this.props} actions={this.actions}>
         <BlockContent>
-          <pre>{this.state.url || "- NO URL -"}</pre>
+          <PlayBuzz url={this.state.url} />
         </BlockContent>
 
         <BlockData>
