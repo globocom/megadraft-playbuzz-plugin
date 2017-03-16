@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Globo.com (https://github.com/globocom/megadraft-playbuzz-plugin/blob/master/README.md)
+ * Copyright (c) 2017, Globo.com (https://github.com/globocom)
  *
  * License: MIT
  */
@@ -50,4 +50,3 @@ gulp.task("dev-server", function (callback) {
     }
   });
 });
-

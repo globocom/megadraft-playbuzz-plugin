@@ -66,11 +66,11 @@
   "author": {
     "author": "Globo.com",
     "email": "",
-    "url": "https://github.com/globocom/megadraft-playbuzz-plugin/blob/master/README.md"
+    "url": "https://globo.com"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/globocom/megadraft-playbuzz-plugin/blob/master/README.md/issues"
+    "url": "https://github.com/globocom/megadraft-playbuzz-plugin/issues"
   },
   "homepage": "https://github.com/globocom/megadraft-playbuzz-plugin/blob/master/README.md"
 }
