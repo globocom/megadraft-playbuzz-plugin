@@ -8,6 +8,7 @@ import React from "react";
 import TestUtils from "react-addons-test-utils";
 import chai from "chai";
 import sinon from "sinon";
+import {MegadraftIcons} from "megadraft";
 
 import Block from "../src/Block";
 
@@ -16,32 +17,34 @@ let expect = chai.expect;
 describe("Block", function () {
   beforeEach(function () {
     this.data = {
-      caption: "media caption"
+      url: "http://www.playbuzz.com/peepersc10/who-is-your-favorite-super-hero"
     };
 
-    this.setReadOnly = sinon.spy();
-    this.updateEntity = sinon.spy();
     this.remove = sinon.spy();
     this.plugin = sinon.spy();
 
-    this.wrapper = TestUtils.renderIntoDocument(
+    this.block = TestUtils.renderIntoDocument(
       <Block container={this} blockProps={this} data={this.data} />
     );
 
-    this.caption = TestUtils.scryRenderedDOMComponentsWithTag(this.wrapper, "input")[0];
+    this.inputElement = TestUtils.scryRenderedDOMComponentsWithTag(this.block, "input")[0];
+    this.buttonElement = TestUtils.scryRenderedDOMComponentsWithTag(this.block, "button")[0];
   });
 
-  it("renders caption from data", function () {
-    expect(this.caption.value).to.be.equal(this.data.caption);
+  it("should have a delete action", function () {
+    expect(this.block.actions).to.have.lengthOf(1);
+    expect(this.block.actions).to.deep.equal([{
+      "key": "delete",
+      "icon": MegadraftIcons.DeleteIcon,
+      "action": this.block.props.container.remove
+    }]);
   });
 
-  it("updates entity on caption change", function () {
-    this.caption.value = "new caption";
-    TestUtils.Simulate.change(this.caption);
-    expect(this.updateEntity.calledWith({caption: "new caption"})).to.be.true;
+  it("should load data from props", function () {
+    expect(this.inputElement.value).to.be.equal(this.data.url);
   });
 
-  it("your tests here...", function () {
-    expect(true).to.be.false;
+  it("should have a button with a \"Load\" label", function () {
+    expect(this.buttonElement.textContent).to.be.equal("Load");
   });
 });
