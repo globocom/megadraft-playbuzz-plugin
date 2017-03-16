@@ -10,6 +10,7 @@ const {BlockContent, BlockData, BlockInput, CommonBlock} = MegadraftPlugin;
 import loadScript from "load-script";
 
 import PlayBuzz from "./PlayBuzz";
+import Button from "./BsButton";
 
 
 export default class Block extends Component {
@@ -85,7 +86,7 @@ export default class Block extends Component {
         </BlockData>
 
         <BlockData>
-          <button onClick={this.load}>Load</button>
+          <Button label="Load" onClick={this.load} />
         </BlockData>
       </CommonBlock>
     );
