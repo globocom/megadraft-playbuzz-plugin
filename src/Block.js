@@ -7,6 +7,7 @@
 import React, {Component} from "react";
 import {MegadraftPlugin, MegadraftIcons} from "megadraft";
 const {BlockContent, BlockData, BlockInput, CommonBlock} = MegadraftPlugin;
+import loadScript from "load-script";
 
 import PlayBuzz from "./PlayBuzz";
 
@@ -33,6 +34,21 @@ export default class Block extends Component {
         errors: []
       }
     };
+  }
+
+  componentDidMount() {
+    if (window.PlayBuzz) { return; }
+    loadScript("//cdn.playbuzz.com/widget/feed.js", function (err, script) {
+      if (err) {
+        this.setState({
+          url: this.state.url,
+          input: {
+            url: this.state.input.url,
+            errors: [ "Cound\'t load the required widget" ]
+          }
+        });
+      }
+    });
   }
 
   _onChangeInput(field, e) {
