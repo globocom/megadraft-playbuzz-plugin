@@ -4,4 +4,4 @@ node_js:
 cache: yarn
 script:
   - npm run lint
-  - npm run cover
+  - npm test
