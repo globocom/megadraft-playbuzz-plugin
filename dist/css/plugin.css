@@ -40,3 +40,18 @@
   height: 33px;
   line-height: 1rem;
 }
+
+.bs-error-list {
+  list-style: none;
+  margin: 0;
+  margin-top: 0.5rem;
+  padding: 0;
+  color: #e83f26;
+  font-family: "Open Sans";
+  font-size: 0.875rem;
+  letter-spacing: -0.01562rem;
+  line-height: 1rem;
+  -webkit-font-smoothing: antialiased;
+  -webkit-transition: all ease-in-out .20s;
+  transition: all ease-in-out .20s;
+}

@@ -8,9 +8,11 @@ import React, {Component} from "react";
 import {MegadraftPlugin, MegadraftIcons} from "megadraft";
 const {BlockContent, BlockData, BlockInput, CommonBlock} = MegadraftPlugin;
 import loadScript from "load-script";
+import validUrl from "valid-url";
 
 import PlayBuzz from "./PlayBuzz";
 import Button from "./BsButton";
+import ErrorList from "./BsErrorList";
 
 
 export default class Block extends Component {
@@ -59,11 +61,12 @@ export default class Block extends Component {
   }
 
   load() {
-    if (!this.state.input.url) {
+    let url = this.state.input.url;
+    if (!url || !this.isValid(url)) {
       return;
     }
     this.setState({
-      url: this.state.input.url,
+      url: url,
       input: {
         url: "",
         errors: []
@@ -71,7 +74,31 @@ export default class Block extends Component {
     });
   }
 
-  render(){
+  isValid(url) {
+    let errors = [];
+    if (!validUrl.isUri(url)) {
+      errors.push("Invalid URL");
+    }
+    const match = /^http:\/\/www\.playbuzz\.com\/.*\/\w+/.exec(this.url);
+    if (!match) {
+      errors.push("Invalid playbuzz URL");
+    }
+
+    if (errors.length) {
+      this.setState({
+        url: this.state.url,
+        input: {
+          url: this.state.input.url,
+          errors: errors
+        }
+      });
+      return false;
+    }
+
+    return true;
+  }
+
+  render() {
     return (
       <CommonBlock {...this.props} actions={this.actions}>
         <BlockContent>
@@ -83,6 +110,7 @@ export default class Block extends Component {
             placeholder="Enter a playbuzz URL"
             value={(this.state.url) ? this.state.url : null}
             onChange={this._onChangeInput.bind(this, "url")} />
+          <ErrorList errors={this.state.input.errors} />
         </BlockData>
 
         <BlockData>
