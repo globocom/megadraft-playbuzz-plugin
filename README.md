@@ -1,4 +1,4 @@
-# megadraft-playbuzz-plugin - Megadraft Plugin
+# megadraft-playbuzz-plugin - Megadraft Plugin [![Build Status](https://travis-ci.org/globocom/megadraft-playbuzz-plugin.svg?branch=master)](https://travis-ci.org/globocom/megadraft-playbuzz-plugin)
 
 ## Usage
 
