@@ -11,8 +11,8 @@ import loadScript from "load-script";
 import validUrl from "valid-url";
 
 import PlayBuzz from "./PlayBuzz";
-import Button from "./BsButton";
-import ErrorList from "./BsErrorList";
+import Button from "./form/Button";
+import ErrorList from "./form/ErrorList";
 
 
 export default class Block extends Component {
