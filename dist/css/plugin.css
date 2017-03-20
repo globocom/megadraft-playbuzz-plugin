@@ -3,7 +3,7 @@
  *
  * License: MIT
  */
-.bs-button {
+.bs-btn {
   padding: 0 1rem;
   text-transform: uppercase;
   color: white;
@@ -17,25 +17,25 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.bs-button + .bs-button {
+.bs-btn + .bs-button {
   margin-left: 10px;
 }
 
-.bs-button--blue {
+.bs-btn--blue {
   background-color: #0669de;
   box-shadow: inset 0 -2px 0 0 rgba(0, 0, 0, 0.3);
 }
 
-.bs-button--blue:hover:not(:active) {
+.bs-btn--blue:hover:not(:active) {
   background-color: #044cb3;
   box-shadow: inset 0 -2px 0 0 rgba(0, 0, 0, 0.3);
 }
 
-.bs-button--blue:active {
+.bs-btn--blue:active {
   background-color: #3192e7;
 }
 
-.bs-button--small {
+.bs-btn--small {
   font-size: 0.75rem;
   height: 33px;
   line-height: 1rem;
