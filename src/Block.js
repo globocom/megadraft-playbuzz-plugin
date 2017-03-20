@@ -4,9 +4,8 @@
  * License: MIT
  */
 
-import React, {Component} from "react";
+import React from "react";
 import {MegadraftPlugin, MegadraftIcons} from "megadraft";
-const {BlockContent, BlockData, BlockInput, CommonBlock} = MegadraftPlugin;
 import loadScript from "load-script";
 import validUrl from "valid-url";
 
@@ -14,88 +13,87 @@ import PlayBuzz from "./PlayBuzz";
 import Button from "./form/Button";
 import ErrorList from "./form/ErrorList";
 
+const {BlockContent, BlockData, BlockInput, CommonBlock} = MegadraftPlugin;
 
-export default class Block extends Component {
+
+export default class Block extends React.Component {
   constructor(props) {
     super(props);
 
-    this._onChangeInput = ::this._onChangeInput;
+    this.onChangeInput = ::this.onChangeInput;
     this.load = ::this.load;
 
-    this.actions = [
-      {
-        "key": "delete",
-        "icon": MegadraftIcons.DeleteIcon,
-        "action": this.props.container.remove
-      }
-    ];
+    this.actions = [{
+      key: "delete",
+      icon: MegadraftIcons.DeleteIcon,
+      action: this.props.container.remove
+    }];
 
+    const url = (props.data.url) ? props.data.url : "";
     this.state = {
-      url: (props.data.url) ? props.data.url : "",
-      input: {
-        url: (props.data.url) ? props.data.url : "",
-        errors: []
-      }
+      url: url,
+      input: url,
+      errors: []
     };
   }
 
   componentDidMount() {
+    const self = this;
     if (window.PlayBuzz) { return; }
+
     loadScript("//cdn.playbuzz.com/widget/feed.js", function (err, script) {
       if (err) {
-        this.setState({
-          url: this.state.url,
-          input: {
-            url: this.state.input.url,
-            errors: [ "Cound\'t load the required widget" ]
-          }
+        self.setState({
+          url: self.state.url,
+          input: self.state.input.url,
+          errors: [
+            `Cound\'t load the required widget: ${script.src}`
+          ]
         });
       }
     });
   }
 
-  _onChangeInput(field, e) {
-    let input = this.state.input;
-    input[field] = e.target.value;
-    this.setState({ input: input });
-  }
-
-  load() {
-    let url = this.state.input.url;
-    if (!url || !this.isValid(url)) {
-      return;
-    }
+  onChangeInput(e) {
     this.setState({
-      url: url,
-      input: {
-        url: "",
-        errors: []
-      }
+      url: this.state.url,
+      input: e.target.value,
+      errors: []
     });
   }
 
-  isValid(url) {
-    let errors = [];
+  validate(url) {
     if (!validUrl.isUri(url)) {
-      errors.push("Invalid URL");
+      return [ "Invalid URL" ];
     }
-    const match = /^http:\/\/www\.playbuzz\.com\/.*\/\w+/.exec(this.url);
+    const match = /^http:\/\/www\.playbuzz\.com\/.*\/\w+/.exec(url);
     if (!match) {
-      errors.push("Invalid playbuzz URL");
+      return [ "Invalid playbuzz URL" ];
     }
+    return null;
+  }
 
-    if (errors.length) {
+  load() {
+    const url = this.state.input;
+    const errors = this.validate(url);
+
+    if (errors && errors.length) {
       this.setState({
-        url: this.state.url,
-        input: {
-          url: this.state.input.url,
-          errors: errors
-        }
+        url: "",
+        input: this.state.input,
+        errors: errors
       });
-      return false;
+      return;
     }
 
-    return true;
+    this.setState({
+      url: url,
+      input: url,
+      errors: []
+    });
+    this.props.container.updateData({
+      url: url
+    });
   }
 
   render() {
@@ -109,8 +107,8 @@ export default class Block extends Component {
           <BlockInput
             placeholder="Enter a playbuzz URL"
             value={(this.state.url) ? this.state.url : null}
-            onChange={this._onChangeInput.bind(this, "url")} />
-          <ErrorList errors={this.state.input.errors} />
+            onChange={this.onChangeInput} />
+          <ErrorList errors={this.state.errors} />
         </BlockData>
 
         <BlockData>

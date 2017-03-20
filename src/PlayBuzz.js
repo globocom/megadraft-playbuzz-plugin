@@ -8,6 +8,12 @@ import React, {Component} from "react";
 
 export default class PlayBuzz extends Component {
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.url !== this.props.url) {
+      window.PlayBuzz.Feed.renderFeed();
+    }
+  }
+
   render() {
     if (!this.props.url) {
       return null;
