@@ -7,7 +7,8 @@
     "load-script": "^1.0.0",
     "megadraft": "^0.4.19",
     "react": "15.2.1",
-    "react-dom": "15.2.1"
+    "react-dom": "15.2.1",
+    "valid-url": "^1.0.9"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
@@ -33,7 +34,6 @@
     "rimraf": "^2.5.2",
     "sinon": "^1.17.4",
     "sinon-chai": "^2.8.0",
-    "valid-url": "^1.0.9",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
   },
