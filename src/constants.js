@@ -5,6 +5,6 @@
  */
 
 export default {
-  PLUGIN_NAME: "megadraft-playbuzz-plugin",
-  PLUGIN_TYPE: "megadraft-playbuzz-plugin"
+  PLUGIN_NAME: "Playbuzz",
+  PLUGIN_TYPE: "playbuzz"
 };
