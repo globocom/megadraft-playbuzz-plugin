@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "megadraft-playbuzz-plugin",
   "main": "lib/plugin.js",
+  "style": "dist/css/plugin.css",
   "dependencies": {
     "load-script": "^1.0.0",
     "megadraft": "^0.4.19",
