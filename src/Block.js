@@ -66,7 +66,7 @@ export default class Block extends React.Component {
     if (!validUrl.isUri(url)) {
       return [ "Invalid URL" ];
     }
-    const match = /^http:\/\/www\.playbuzz\.com\/.*\/\w+/.exec(url);
+    const match = /^https?:\/\/www\.playbuzz\.com\/.*\/\w+/.exec(url);
     if (!match) {
       return [ "Invalid playbuzz URL" ];
     }
